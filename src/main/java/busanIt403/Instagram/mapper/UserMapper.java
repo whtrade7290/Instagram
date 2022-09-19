@@ -5,5 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    UserModel selectUser();
+
+    void register(UserModel userModel);
+
+    UserModel findByUsername(String username);
 }

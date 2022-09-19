@@ -16,8 +16,6 @@ public class HomeController {
     @RequestMapping("/")
     public String index(Model model){
 
-       UserModel userModel = userService.selectUser();
-        model.addAttribute("userModel", userModel);
         return "index";
     }
 }

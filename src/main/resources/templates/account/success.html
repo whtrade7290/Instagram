@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<th:block sec:authorize="isAuthenticated()">
+    인증완료!
+    <p sec:authentication="name"></p>
+    <button type="button" onclick="location.href='/logout'">로그아웃</button>
+
+    <ul>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">사진등록</a></li>
+        <li><a href="#">스토리확인</a></li>
+        <li><a href="#">팔로우 하기</a></li>
+        <li><a href="#">팔로우 끊기</a></li>
+    </ul>
+</th:block>
+<!-- 인증되지 않으면 아무것도 못봄 -->
+<th:block sec:authorize="!isAuthenticated()">
+    인증안됨
+</th:block>
+
+
+
+
+</body>
+</html>

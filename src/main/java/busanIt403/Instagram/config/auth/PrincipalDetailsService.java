@@ -1,21 +1,27 @@
-package busanIt403.Instagram.service;
+package busanIt403.Instagram.config.auth;
 
 import busanIt403.Instagram.mapper.UserMapper;
 import busanIt403.Instagram.model.UserModel;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-@Log
+
+
 @Service
-public class UserService {
+public class PrincipalDetailsService implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
 
-    public void register(UserModel userModel) {
-        userMapper.register(userModel);
+    // 시큐리티 session = Authentication = UserDetails
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserModel userModel = userMapper.findByUsername(username);
+        if (userModel != null){
+            return new PrincipalDetails(userModel);
+        }
+        return null;
     }
 }
